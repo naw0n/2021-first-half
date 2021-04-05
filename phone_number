@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+	string name;
+	string phone;
+public:
+	string getName() { return name; }
+	string getPhone() { return phone; }
+	void set(string _name, string _phone) { name = _name; phone = _phone; }
+};
+
+int main(void) {
+	int a;
+	string name, phone;
+	string search;
+	Person p[3];
+
+	cout << "이름과 전화번호를 입력해주세요" << endl;
+	cout << "사람 1>> ";
+	cin >> name >> phone;
+	p[0].set(name,phone);
+	cout << "사람 2>> ";
+	cin >> name >> phone;
+	p[1].set(name, phone);
+	cout << "사람 3>> ";
+	cin >> name >> phone;
+	p[2].set(name, phone);
+
+	cout << "모든 사람의 이름은 " << " " << p[0].getName() << " " << p[1].getName() << " " << p[2].getName() << endl;
+
+	cout << "전화번호를 검색합니다. 이름을 입력하세요>> ";
+	cin >> search;
+	for (int i = 0; i < 3; i++)
+		if (p[i].getName() == search) a = i;
+	cout << "전화번호는 " << p[a].getPhone() << endl;
+	return 0;
+}
