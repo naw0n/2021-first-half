@@ -1,0 +1,95 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class calculator {
+public:
+	int add(int a, int b);
+	int min(int a, int b);
+	int mul(int a, int b);
+	int div(int a, int b);
+	int mod(int a, int b);
+};
+
+int calculator::add(int a, int b) {
+	return a + b;
+}
+int calculator::min(int a, int b) {
+	return a - b;
+}
+int calculator::mul(int a, int b) {
+	return a * b;
+}
+int calculator::div(int a, int b) {
+	return a / b;
+}
+int calculator::mod(int a, int b) {
+	return a % b;
+}
+
+int main(void) {
+
+	while (true) {
+		int a, b, sen;
+		calculator cal;
+
+		cout << "Calculator Program" << endl;
+		cout << "1.ADD   2.MIN   3.MUL   4.DIV   5.MOD   6.EXIT" << endl;
+		cout << "Command Input >>  ";
+		cin >> sen;
+
+
+		switch (sen) {
+			case 1:
+				cout << "Two Integer Input >>  ";
+				cin >> a >> b;
+				cout << "Ans = " << cal.add(a,b) << endl;
+				cout << endl;
+				break;
+			case 2:
+				cout << "Two Integer Input >>  ";
+				cin >> a >> b;
+				cout << "Ans = " << cal.min(a,b) << endl;
+				cout << endl;
+				break;
+			case 3:
+				cout << "Two Integer Input >>  ";
+				cin >> a >> b;
+				cout << "Ans = " << cal.mul(a,b) << endl;
+				cout << endl;
+				break;
+			case 4:
+				cout << "Two Integer Input >>  ";
+				cin >> a >> b;
+				if (b == 0) {
+					cout << "Division operation with 0 is impossible." << endl;
+					cout << endl;
+				}
+				else {
+					cout << "Ans = " << cal.div(a, b) << endl;
+					cout << endl;
+				}
+				break;
+			case 5:
+				cout << "Two Integer Input >>  ";
+				cin >> a >> b;
+				if (b == 0) {
+					cout << "Modulo operation with 0 is impossible." << endl;
+					cout << endl;
+				}
+				else {
+					cout << "Ans = " << cal.mod(a, b) << endl;
+					cout << endl;
+				}
+				break;
+			case 6:
+				cout << "Program exit" << endl;
+				exit(0);
+			default:
+				cout << "잘못된 입력입니다." << endl;
+				cout << endl;
+				break;
+			}
+		}
+	return 0;
+	}
