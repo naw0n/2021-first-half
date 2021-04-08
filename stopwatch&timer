@@ -1,0 +1,81 @@
+#include <iostream>
+#include <windows.h>
+#include <time.h>
+#include <conio.h>
+using namespace std;
+
+class timer {
+	int minute = 0;
+	int second = 0;
+public:
+	void setMinute(int m);
+	void setSecond(int s);
+	int getMinute();
+	int getSecond();
+	void stopWatch();
+	void Main();
+};
+
+void timer::setMinute(int m) {
+	minute = m;
+}
+void timer::setSecond(int s) {
+	second = s;
+}
+int timer::getMinute() {
+	return minute;
+}
+int timer::getSecond() {
+	return second;
+}
+void timer::stopWatch() {
+	cout << "타이머를 중지하려면 아무키나 누르세요(결과는 초 단위로 나옵니다.)" << endl;
+	time_t start, end;
+	double result;
+	start = clock();
+	while (1) {
+		if (_kbhit() == 1) {
+			break;
+		}
+	}
+	end = clock();
+	result = (double)(end - start) / CLOCKS_PER_SEC;
+	cout << "걸린 시간은 " << result << "초 입니다." << endl;
+		}
+
+void timer::Main() {
+	int user;
+	cout << "timer 객체가 생성되었습니다." << endl;
+	while(true){
+		cout << "\n1: 스톱워치 2 : 알람기능 3 :  종료" << endl;
+		cin >> user;
+		switch (user) {
+			case 1:
+				stopWatch();
+				break;
+			case 2:
+				int time;
+				cin.clear();
+				cout << "몇 분 몇 초 뒤에 알람을 종료할지 설정하세요" << endl;
+				cin >> minute >> second;
+				time = 60 * minute + second;
+				while(time>0) {
+				Sleep(1000);
+				time--; }
+				cout << minute << "분 " << second << "초가 지났습니다!" << endl;
+				break;
+			case 3:
+				cout << "프로그램이 종료되었습니다." << endl;
+				exit(0);
+			default:
+				cout << "잘못된 입력입니다." << endl;
+				cout << endl;
+				break;
+		}
+	}
+}
+int main() {
+	timer* p = new timer;
+	p->Main();
+	delete p;
+}
