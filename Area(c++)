@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+private:
+	int height, width; //height, width 멤버 변수 private 선언
+public:
+	// getHeight, getWidth 멤버 함수를 public 선언
+	int getHeight();
+	int getWidth();
+	void setHeight(int s_height);
+	void setWidth(int s_width);
+	void show();
+	int getArea();
+	bool getIsTheSquare(); // 정사각형 여부 알려주는 함수 bool형
+}; // 함수 선언
+
+int main() {
+	Rectangle r1;
+	Rectangle r2;
+	r1.setHeight(4);
+	r1.setWidth(3);
+	r1.show();
+
+	r2.setHeight(5);
+	r2.setWidth(5);
+	r2.show();
+}
+
+void Rectangle::setHeight(int s_height) {
+	height = s_height;
+}
+void Rectangle::setWidth(int s_width) {
+	width = s_width;
+}
+int Rectangle::getHeight() {
+	return height;
+}
+int Rectangle::getWidth() {
+	return width;
+}
+int Rectangle::getArea() {
+	return height * width;
+}
+bool Rectangle::getIsTheSquare() {
+	if (height == width)
+		return true;
+	else
+		return false;
+}
+void Rectangle::show() {
+	cout << "가로 : " << width;
+	cout << "          세로 : " << height << endl;
+
+	cout << "넓이 : " << getArea() << endl;
+	if (true) {
+		cout << "정사각형입니다." << endl;
+	}
+	else {
+		cout << "정사각형이 아닙니다." << endl;
+	}
+	cout << "넓이 : " << getArea() << endl;
+	cout << endl;
+
+
+}
