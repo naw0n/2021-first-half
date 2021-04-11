@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Spiral {
+        private static int n;
+        private static int m;
+        int i = 0;
+
+        void fill(int m,int line) {
+            int i = 0;
+            // spiral first line
+            if (line == 0) {
+                for (i = 0; i < m; i++) {
+                    System.out.print((i+1)+ "  ");
+                }
+            }
+            // spiral last line
+            else if (line == (n - 1)) {
+                for (i = 0; i < m; i++) {
+                    System.out.print((2*m+n-2-i) + "  ");
+                }
+            }
+            // other line (inner)
+            else {
+                System.out.print((2*m+2*n-3-line) + "  "); // inner first number
+                fill(m-2,line-1); // rest number
+                System.out.print((m+line)+"  "); // inner last number
+            }
+        }
+        void row(int line) {
+            for (i = 0; i < n; i++) {
+                fill(m,i);
+                System.out.println();
+            }
+        }
+            public static void main(String[] args) {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("가로와 세로를 순서대로 입력하세요");
+
+                Spiral sequence = new Spiral();
+                sequence.m = sc.nextInt(); // 가로
+                sequence.n = sc.nextInt(); // 세로
+
+                sequence.row(n);
+                System.out.println();
+                System.exit(0);
+            }
+        }
