@@ -1,0 +1,189 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void run();
+void normalizeText();
+void expressionSpit(string text);
+int operate(int sum, string newText, int sign);
+
+int main()
+{
+	run();
+}
+
+/*** 프로그램 시작 ***/
+void run()
+{
+	char cleanBuffer = 32;
+	int onOff = 1;
+	while (onOff)
+	{
+		normalizeText();
+		cout << endl << "종료 = 0,  계속 = 1 : ";
+		while (!(cin >> onOff))
+		{
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+			cout << "잘못된 값을 입력하셨습니다." << endl
+				<< "0이나 1을 입력해주세요." << endl;
+		}
+		while ((cleanBuffer = getchar()) != '\n'); // 버프 비움, 입력 밀림 방지
+	}
+}
+
+/*** 문자열 정규화(normalize) ***/
+void normalizeText()
+{
+	string expression = "";
+	int loop = 0, textLength, i = 0;
+
+	cout << "4칙 연산식을 입력하세요 : " << endl;
+	getline(cin, expression, '\n');
+
+	// 1. 기능 : 공백을 제거한다.
+	textLength = expression.length();              //////// 문자열 길이 초기화
+	//cout << "입력 수식 = " << textLength << ". " << expression << endl;
+	for (loop = 0; loop < textLength; loop++) // 2중으로 돌려야 완벽 제거
+	{
+		while (expression[loop] == 32)   ///////////////////////// 공백 제거
+		{
+			expression.erase(loop, 1);
+			textLength--;                      //////// 배열 범위 벗어남 오류 예방
+		}
+	}
+
+	// 2. 기능 : 문자(a-Z)와 연산자 이외 기호 코드를 제거한다.
+	textLength = expression.length();              //////// 문자열 길이 초기화
+	for (loop = 0; loop < textLength; loop++) // 2중으로 돌려야 완벽 제거
+	{
+		while (expression[loop] < 42 || expression[loop] > 57)
+		{                                            ///// 아스키 코드 : 42 = '*',  57 = '9'
+			expression.erase(loop, 1);
+			textLength--;                     ///////// 배열 범위 벗어남 오류 예방
+			if (textLength < 1)
+			{
+				break;
+			}
+		}
+	}
+
+	// 3. 기능 : 중첩된 연산자(+, -, *, /)를 제거한다.	
+	textLength = expression.length();              //////// 문자열 길이 초기화
+	for (loop = 0; loop < textLength; loop++) // 2중으로 돌려야 완벽 제거
+	{
+		while (expression[loop] < 48 && expression[loop + 1] < 48)
+		{                                            ///// 아스키 코드 : 42 = '*',  57 = '9'
+			expression.erase(loop, 1);
+			textLength--;                     ///////// 배열 범위 벗어남 오류 예방
+			if (loop == textLength)
+			{
+				break;
+			}
+		}
+	}
+
+	// 4. 기능 : 남은 기호 제거: '.' 과 ',' 삭제
+	textLength = expression.length();              //////// 문자열 길이 초기화
+	for (loop = 0; loop < textLength; loop++) // 2중으로 돌려야 완벽 제거
+	{
+		while (expression[loop] < 48)
+		{                                            ///// 아스키 코드 : 44 = ',', 46 = '.'
+			if (expression[loop] == 44 || expression[loop] == 46)
+			{
+				expression.erase(loop, 1);
+				textLength--;                 ///////// 배열 범위 벗어남 오류 예방
+			}
+			if (loop == textLength)
+			{
+				break;
+			}
+			loop++;
+		}
+	}
+
+	// 5. 기능 : 첫 머리가 연산자 일 경우 제거한다.
+	if (expression[0] < 48)
+	{
+		expression.erase(0, 1);
+	}
+	expressionSpit(expression);
+}
+
+/*** 식 분리 ***/
+void expressionSpit(string text)
+{
+	string word, temp;
+	int  i = 0, j = 0, sign = 0, signTemp = 46, textLength;
+	int sum = 0;
+	int count = 0;
+	cout << "입력 수식 : " << text << endl;
+	text = text + "$";                        // 종료 구분자 추가
+	textLength = text.length();
+	while (i < textLength)
+	{
+		if (text[i] > 47)
+		{
+			count++;
+			word += text[i];
+			if (count > 9)
+			{
+				cout << "정수 범위를 벗어 날 수 있습니다. " << endl
+					<< "big Integer은 계산 할 수 없습니다." << endl;
+				return;
+			}
+		}
+		if (text[i] < 48)
+		{
+			temp = word;
+			signTemp = text[i];
+			cout << j << ". " << (char)sign << " ";
+			sum = operate(sum, word, sign);
+			word = "";
+			count = 0;
+			j++;
+		}
+		sign = signTemp;
+		i++;
+	}
+	cout << endl << "Result = " << sum << endl;
+}
+
+/*** 연산 ***/
+int operate(int sum, string newText, int sign)
+{
+	switch (sign)
+	{
+	case 43:   // +
+		sum += stoi(newText);
+		break;
+	case 45:   // -
+		sum -= stoi(newText);
+		break;
+	case 42:   // *
+		sum *= stoi(newText);
+		break;
+	case 47:   // /
+		if (newText == "0")
+		{
+			cout << "0으로 나눌 수 없습니다." << endl;
+			return 0;
+		}
+		sum /= stoi(newText);
+		break;
+	case 46:   // . 초기값 대입		
+		if (newText == "")
+		{
+			cout << "계산 할 값이 없습니다." << endl;
+			return 0;
+		}
+		sum = stoi(newText);
+		break;
+	default:
+		cout << "식 입력 오류입니다." << endl;
+		break;
+	}
+	cout << "operating = " << sum << endl;
+	return sum;
+}
