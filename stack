@@ -1,0 +1,139 @@
+#include<stdio.h>
+#include <string.h>
+
+void push(void);
+void pop(void);
+void display(void);
+
+char stackProp[100], stackOper[100]; // 명제 스택과 연산자 스택
+int topProp, topOper;
+
+int choice, n, top, x, i;
+
+char inputProp[80]; // 합성명제 키보드 입력
+
+int main(void)
+{
+    //clrscr();
+    topProp = -1; //스택의 꼭대기
+    topOper = -1;
+    // printf("\n Enter the size of STACK[MAX=100]:");
+    printf("\n 스택의 크기를 입력: ");
+    scanf_s("%d", &n);;
+
+    printf("합성명제 입력 : ");
+    scanf_s("%s", inputProp);
+    getchar(); // 엔터키 처리 코드
+    strcpy(inputProp, "P^Rv~R=R^P>~Q^R@Q");
+
+    // printf("\n\t STACK OPERATIONS USING ARRAY");
+    printf("\n\t 배열로 만든 STACK");
+    printf("\n\t--------------------------------");
+    // printf("\n\t 1.PUSH\n\t 2.POP\n\t 3.DISPLAY\n\t 4.EXIT");
+    printf("\n\t 1.PUSH(입력)\n\t 2.POP(출력)\n\t 3.DISPLAY(화면출력)\n\t 4.EXIT(종료)");
+    
+    do //반복문
+    {
+        // printf("\n Enter the Choice:");
+        printf("\n 메뉴 선택: ");
+        scanf_s("%d", &choice);
+        switch (choice)
+        {
+            case 1:
+            {
+                push();
+                break;
+            }
+            case 2:
+            {
+                pop();
+                break;
+            }
+            case 3:
+            {
+                display();
+                break;
+            }
+            case 4:
+            {
+                printf("\n\t EXIT POINT ");
+                break;
+            }
+            default:
+            {
+               // printf("\n\t Please Enter a Valid Choice(1/2/3/4)");
+                printf("\n\t 잘못된 입력입니다.(1/2/3/4)");
+            }
+
+        }
+    }     while (choice != 4); //end do~while 
+    return 0;
+}
+void push(void)
+{
+    if (topProp >= n - 1)
+    {
+        // printf("\n\tSTACK is over flow");
+        printf("\n\tSTACK 오버플로우");
+
+    }
+    else
+    {
+        //for (int i = 0; i < strlen(inputProp); i++) {
+        //printf("inputProp[%d] = %c \n", i, inputProp[i]); // 합성명제 분리 출력
+        
+        
+        for (int i = 0; i < strlen(inputProp); i++) {
+            //명제이면 명제 스택에 push
+            if (inputProp[i] == 'P' || inputProp[i] == 'p' ||
+                inputProp[i] == 'Q' || inputProp[i] == 'q' ||
+                inputProp[i] == 'R' || inputProp[i] == 'r') {
+
+                topProp++;
+                stackProp[topProp] = inputProp[i]; // 명제 스택 push
+                printf("명제 스택에 push 완료 \n\n");
+            } // end if
+
+            // 연산자 이면 연산자 스택에 push
+            if (inputProp[i] == '^' || inputProp[i] == 'v' ||
+                inputProp[i] == '~' || inputProp[i] == '=' ||
+                inputProp[i] == '>' || inputProp[i] == '@') {
+                topOper++;
+                stackOper[topOper] = inputProp[i]; // 연산자 스택 push
+                printf("연산자 스택에 push 완료 \n\n");
+            } // end if
+        }
+    }
+}
+void pop() //스택에서 출력
+{
+    // 명제 스택에서 pop
+
+    if (topProp <= -1)
+    {
+       // printf("\n\t Stack is under flow");
+        printf("\n\t Stack 언더플로우");
+    }
+    else
+    {   
+        printf("\n\t 명제 스택에서 pop : %c", stackProp[topProp]);
+        topProp--;
+        //top--; //스택에서 op 하면 top = top-1
+    }
+}
+void display()
+{   //명제 스택 출력
+    if (top >= 0)
+    {
+        printf("\n The elements in 명제 STACK \n");
+        for (i = topProp; i >= 0; i--)
+            printf("\n%d", stackProp[i]);
+        printf("\n Press Next Choice");
+    }
+    else
+    {
+       // printf("\n The STACK is empty");
+        printf("\n STACK이 비어있다.");
+    }
+
+}
