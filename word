@@ -1,0 +1,13 @@
+#include <iostream>
+
+class Word {
+public:
+    char *name;
+    char *mean;
+    Word();
+    string getName();
+    string getMean();
+    ~Word();
+}
+
+Word :: ~Word(){}
