@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void overloading() {
+	cout << "string: " << endl;
+	cout << "int: "  << endl;
+}
+void overloading(int a) {
+	cout << "string: " << endl;
+	cout << "int: " << a << endl;
+	cout << endl;
+}
+void overloading(int a, string b) {
+	cout << "string: " << b << endl;
+	cout << "int: " << a << endl;
+	cout << endl;
+}
+void overloading(string b, int a) {
+	cout << "string: " << b << endl;
+	cout << "int: " << a << endl;
+	cout << endl;
+}
+void overloading(string b) {
+	cout << "string: " << b << endl;
+	cout << "int: " << endl;
+	cout << endl;
+}
+int main() {
+	overloading();
+	overloading(3);
+	overloading(3, "Hello World");
+	overloading("Hello World", 3);
+	overloading("Hello World");
+}
