@@ -1,0 +1,39 @@
+#define _CRT_SECURE_NO_WARNINGS  
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Word {
+public:
+	char name[30];
+	char mean[30];
+public:
+	Word();
+	~Word();
+};
+Word::Word() {}
+
+Word::~Word() {
+	//delete[] name;
+	//delete[] mean;
+}
+
+int main() {
+	Word w1;
+
+	strcpy(w1.name, "word1 name");
+	strcpy(w1.mean, "word1 mean");
+
+	Word w2;
+
+	strcpy(w2.name, "word2 name");
+	strcpy(w2.mean, "word2 mean");
+
+	cout << "w1:" << endl;
+	cout << w1.name << endl;
+	cout << w1.mean << endl;
+
+	cout << "w2:" << endl;
+	cout << w2.name << endl;
+	cout << w2.mean << endl;
+}
