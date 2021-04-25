@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class week3_2 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("돈의 액수를 입력하세요. ");
+
+        int money = sc.nextInt();
+
+        int a = money/50000; // 50000원
+        int b = money%50000/10000; // 10000원
+        int c = money%50000%10000/1000; // 1000원
+        int d = money%50000%10000%1000/500; // 500원
+        int e = money%50000%10000%1000%500/100; // 100원
+        int f = money%50000%10000%1000%100%100/50; // 50원
+        int g = money%50000%10000%1000%100%100%50/10; // 10원
+        int h = money%50000%10000%1000%100%100%50%10; // 1원
+
+        System.out.println("50000원: "+a+"개");
+        System.out.println("10000원: "+b+"개");
+        System.out.println("1000원: "+c+"개");
+        System.out.println("500원: "+d+"개");
+        System.out.println("100원: "+e+"개");
+        System.out.println("50원: "+f+"개");
+        System.out.println("10원: "+g+"개");
+        System.out.println("1원: "+h+"개");
+
+    }
+
+}
