@@ -1,0 +1,13 @@
+#include <iostream>
+#define BOARD_SIZE 19
+
+Location class
+{
+	int col;
+	int row;
+	Void set(int c, int r);
+	int getCol();
+	int getRow();
+	Location(int c, int r);
+	Location();
+};
