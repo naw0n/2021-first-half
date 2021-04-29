@@ -3,9 +3,6 @@
 #include<cstdio>
 #include<algorithm>
 #include<vector>
-
-
-출처: https://blockdmask.tistory.com/206 [개발자 지망생]
 #define BOARD_SIZE 19
 
 Location class
