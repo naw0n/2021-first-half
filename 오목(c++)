@@ -15,3 +15,7 @@ Location class
 	Location(int c, int r);
 	Location();
 };
+
+bool isInside(int y, int x){
+    return (y>=1 && y<N) && (x>=1 && x<N);
+}
