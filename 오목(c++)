@@ -27,3 +27,6 @@ bool compare(pair<int, int> a, pair<int, int> b){
     }
 }
  
+void myPrintFail(){
+    cout <<"0";
+    }
