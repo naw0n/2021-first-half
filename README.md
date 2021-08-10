@@ -1,10 +1,9 @@
-- 👋 Hi, I’m @naw0n
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning C,C++,JAVA
-- 💞️ I’m looking to collaborate on DESIGN
-- 📫 How to reach me ...
+2021-first-half
 
-<!---
-naw0n/naw0n is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+Subject
+
+어드벤처 디자인(프로젝트)
+심화프로그래밍(C++)
+객체지향프로그래밍(JAVA)
+컴퓨터구성(회로 관련)
+계산적사고법(전반적인 기초지식)
